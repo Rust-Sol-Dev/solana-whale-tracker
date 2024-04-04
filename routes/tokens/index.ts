@@ -59,7 +59,7 @@ Token.get("/pair", async (req: Request, res: Response) => {
 
 // @route    GET api/tokens/topholders
 // @desc     Get top holders of current token
-// @params   tokenMint:string
+// @params   address:string
 // @access   Public
 Token.get("/topholders", async (req: Request, res: Response) => {
   try {
@@ -83,7 +83,7 @@ Token.get("/topholders", async (req: Request, res: Response) => {
 
 // @route    GET api/tokens/toptrader
 // @desc     Get top traders of current token
-// @params   token:string
+// @params   address:string
 // @access   Public
 Token.get("/toptraders", async (req: Request, res: Response) => {
   try {
@@ -96,7 +96,7 @@ Token.get("/toptraders", async (req: Request, res: Response) => {
     const pairsData = await axios.get(`${DEX_API_URL}/tokens/${token}`)
     const pairsList = pairsData.data.pairs
     const raydiumPools = pairsList.filter((item: any) => (item.dexId === "raydium"))
-    const filtered: IPair[] = raydiumPools.map((item: any) => ({
+    const filtered:IPair[] = raydiumPools.map((item: any) => ({
       pairAddress: item.pairAddress,
       baseToken: {
         address: item.baseToken.address,
@@ -109,6 +109,7 @@ Token.get("/toptraders", async (req: Request, res: Response) => {
         symbol: item.quoteToken.symbol
       }
     }));
+
     const data = await getTopTradersList(filtered)
     res.json(data)
   } catch (error: any) {

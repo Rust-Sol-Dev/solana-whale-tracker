@@ -43,4 +43,4 @@ server.listen(PORT, () => {
 });
 
 // Fetch new pool data
-trackNewPool()
+// trackNewPool()

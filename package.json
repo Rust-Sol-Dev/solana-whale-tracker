@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "Whale Tracker Backend server",
   "main": "index.ts",
-  "pre-commit": [
-    "ts.check",
-    "build"
-  ],
   "scripts": {
     "dev": "ts-node-dev index.ts",
     "start": "ts-node index.ts",

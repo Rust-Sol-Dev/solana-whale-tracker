@@ -25,13 +25,12 @@ export const isValidSolanaAddress = async (address: string) => {
 
 export const getTopTradersList = async (info: IPair[]) => {
   let data: IPair[] = info
-  let alltoptraders: string[] = []
+  let alltoptraderlist: string[] = []
   const whaleList: string[] = []
-
   for (let i = 0; i < data.length; i++) {
-    const io = `${DEX_IO_URL}/${data[i].pairAddress}?q=toptrader`;
-    await driver.get(io)
-    const pageSource = (await driver.getPageSource()).toString()
+    const io = `${DEX_IO_URL}/${data[i].pairAddress}?q=toptrader`
+    await driver.get(io);
+    const pageSource = (await driver.getPageSource()).toString();
     const regexPattern = /X[1-9A-HJ-NP-Za-km-z]{44}/g;
     let match;
     const matches: string[] = [];
@@ -39,14 +38,14 @@ export const getTopTradersList = async (info: IPair[]) => {
       matches.push(match[0].slice(1, 45));
     }
     data[i].topTraders = matches
-    alltoptraders = alltoptraders.concat(matches)
+    alltoptraderlist = alltoptraderlist.concat(matches)
   }
-  alltoptraders.map((item, index) => {
-    const count = alltoptraders.indexOf(item, index + 1)
+  alltoptraderlist.map((item, index) => {
+    const count = alltoptraderlist.indexOf(item, index + 1)
     if (count != -1) {
-      alltoptraders.filter(x => x != item)
+      alltoptraderlist.filter(x => x != item)
       whaleList.push(item)
     }
   })
-  return { pooldata: data, whaleList }
+  return { poolData: data, whaleList }
 }

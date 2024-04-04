@@ -11,14 +11,14 @@ export type IPairInfo = {
 }
 
 export interface IToken {
-  address:string
-  name :string
-  symbol:string
+  address: string;
+  name: string;
+  symbol: string;
 }
 
 export interface IPair {
-  pairAddress:string
-  baseToken:IToken
-  quotoeToken:IToken
-  topTraders?:string[]
+  pairAddress: string;
+  baseToken: IToken;
+  quoteToken: IToken;
+  topTraders?: string[]
 }
